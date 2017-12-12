@@ -1,4 +1,4 @@
 ![Screenshot](gan.PNG)
-![Screenshot](sel.png)
+![Screenshot](sel.PNG)
 
 I could do a better job keeping my interfaces small.
