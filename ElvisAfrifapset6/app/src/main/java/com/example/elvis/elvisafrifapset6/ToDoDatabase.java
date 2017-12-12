@@ -22,7 +22,7 @@ public class ToDoDatabase extends SQLiteOpenHelper {
 
     public static ToDoDatabase getInstance(Context context) {
         if(instance == null) {
-            instance = new ToDoDatabase(context, "stringname",null, 1);
+            instance = new ToDoDatabase(context, "todos",null, 1);
         }
         return instance;
     }
@@ -51,6 +51,19 @@ public class ToDoDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + "todos");
+        onCreate(sqLiteDatabase);
+    }
 
+    public void update(long id, int completed) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("completed", completed);
+        db.update("todos", cv, "_id = " + id, null);
+    }
+
+    public void delete(long id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("todos", "_id = " + id, null);
     }
 }

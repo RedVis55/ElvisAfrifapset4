@@ -12,8 +12,8 @@ import android.widget.TextView;
  */
 
 public class TodoAdapter extends ResourceCursorAdapter {
-    public TodoAdapter(Context context, int layout, Cursor c) {
-        super(context, layout, c);
+    public TodoAdapter(Context context, Cursor c) {
+        super(context, R.layout.row_todo, c);
     }
 
     @Override
@@ -22,13 +22,11 @@ public class TodoAdapter extends ResourceCursorAdapter {
         String name2 = cursor.getString(name);
 
         int name3 = cursor.getColumnIndex("completed");
-        String name4 = cursor.getString(name3);
+        int name4 = cursor.getInt(name3);
 
-        CheckBox gedaan = (CheckBox) view.findViewById(R.id.gedaan);
-
-        if(gedaan.isChecked())
-        {gedaan.setChecked(true);
-
+        CheckBox gedaan = view.findViewById(R.id.gedaan);
+        if(name4 == 0) {
+            gedaan.setChecked(true);
         }
         else {
             gedaan.setChecked(false);
